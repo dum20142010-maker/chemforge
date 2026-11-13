@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b0e13">
+  <title>ChemForge — Molecular Intelligence Lab</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">⌬</div>
+        <div><div class="brand-name">CHEMFORGE</div><div class="brand-sub">Molecular intelligence lab</div></div>
+      </div>
+      <div class="top-actions">
+        <span class="status"><i class="dot"></i><span id="status">Workspace ready</span></span>
+        <span class="pill">Research workspace</span>
+        <button class="icon-btn" id="new-chat" title="New conversation">＋</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="panel chat-panel">
+        <div class="panel-head">
+          <div><div class="head-title"><span class="head-icon">✧</span> ChemForge Agent</div>
+            <div class="head-sub">Ask, explore, design and reason together</div></div>
+          <button class="icon-btn" id="clear-chat" title="Clear conversation">⌫</button>
+        </div>
+        <div class="chat-stream" id="chat">
+          <div class="welcome" id="welcome">
+            <div class="orb">⌬</div>
+            <h1>What shall we discover?</h1>
+            <p>Your chemistry workspace is ready. Explore molecular structures, understand materials, ask scientific questions or create a new design with your agent.</p>
+            <div class="suggestions">
+              <button class="suggestion" data-prompt="Create a 3D water molecule and explain its molecular geometry."><b>✧ Create a molecule</b>Build and explore a 3D structure</button>
+              <button class="suggestion" data-prompt="Explain covalent bonding with an interactive molecular example."><b>⌁ Explore bonding</b>Understand atoms and bonds</button>
+              <button class="suggestion" data-prompt="Show me a crystal lattice and explain its unit cell."><b>▦ Explore crystals</b>Discover repeating structures</button>
+              <button class="suggestion" data-prompt="Help me plan a molecule design specification. Ask me what properties I need."><b>◇ Design a candidate</b>Start with desired properties</button>
+            </div>
+          </div>
+        </div>
+        <form class="composer-wrap" id="form">
+          <textarea id="input" rows="2" placeholder="Ask ChemForge anything about chemistry…" aria-label="Message ChemForge"></textarea>
+          <div class="composer-bottom"><span class="hint">Enter to send · Shift + Enter for a new line</span><button class="send" id="send" type="submit">↑</button></div>
+        </form>
+      </section>
+
+      <section class="panel workspace">
+        <div class="workspace-head">
+          <div><div class="workspace-title">Live workspace</div><div class="workspace-kicker" id="subtitle">Your agent's work appears here</div></div>
+          <div class="workspace-actions">
+            <button class="icon-btn" id="reset" title="Reset view">⟳</button>
+            <button class="icon-btn" id="export" title="Export workspace JSON">⇩</button>
+          </div>
+        </div>
+        <div class="workspace-body">
+          <div class="preview-card">
+            <div class="preview-top">
+              <div><div class="preview-label" id="kind">SCIENTIFIC PREVIEW</div><div class="preview-name" id="title">Your molecular canvas</div><div class="formula" id="formula"></div></div>
+              <div class="preview-badge" id="count">Awaiting a design</div>
+            </div>
+            <canvas id="mol-canvas"></canvas>
+            <div class="empty-state" id="empty"><div class="empty-icon">⌬</div><strong>Your workspace is waiting</strong><p>Ask the agent to create a molecule, explore an atom, model a crystal or analyse a chemical concept.</p></div>
+            <div class="preview-controls"><button id="rotate">⟳ Rotate</button><button id="labels">Atom labels: on</button></div>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">Structure type</div><div class="info-value" id="info-kind">—</div><div class="info-note">Agent-generated preview</div></div>
+            <div class="info-card"><div class="info-label">Atoms / nodes</div><div class="info-value" id="info-atoms">—</div><div class="info-note" id="info-bonds">Bond connections: —</div></div>
+          </div>
+          <div class="details-card"><div class="details-head"><b>Structure details</b><span class="muted" id="smiles">No structure yet</span></div><div class="atom-legend" id="legend"><span class="muted">Element and bond details appear here.</span></div></div>
+          <div class="details-card"><div class="details-head"><b>Agent notes & validation</b><span class="pill">Live</span></div><ul class="notes" id="notes"><li>Generated structures are illustrative until independently validated with chemistry software.</li></ul></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
